@@ -1,38 +1,77 @@
-.App {
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(238, 238, 238);
+}
+
+.DisplayWordSection{
+  color: black;
+}
+
+.Letter{
+  display: inline-block;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-style: groove;
+  width: 4vw;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.GuessedLetter{
+  display: inline-block;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-style: groove;
+  width: 4vw;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.304);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.GuessedLetterMessageDisplayed{
+  font-size: 2vw;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.DisplayNone{
+  display: none;
 }
 
-.App-link {
-  color: #61dafb;
+.HangmanImageWordDisplay{
+  display: inline-block;
+  font-size: 2vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.HangmanImageDisplay{
+  display: inline-block;
+}
+
+.HelpPopUp{
+  position: fixed;
+  top: 3vw;
+  left: 3vw;
+  width: 90%;
+  height: 90%;
+  background-color: grey;
+}
+
+.HelpPopUpInner{
+  position: relative;
+  padding: 5vw;
+  width: 100%;
+  max-width: 60vw;
+}
+
+.CloseButton{
+  position: absolute;
+  top: 1vw;
+}
+
+.HelpText{
+  font-size: 1.25vw;
+}
+
+.HelpTitle{
+  font-size: 2vw;
+}
+
+.HelpTitle2{
+  font-size: 1.5vw;
 }
