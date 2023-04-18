@@ -1,10 +1,51 @@
-body{
+.App{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: rgb(238, 238, 238);
+  background-image: url("./images/Prison.jpeg");
+  min-height: 100vh;
+  color: white;
+}
+
+.PageTitle{
+  color: white;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+.TitleSection{
+  min-height: 20vh;
+  display: inline-block;
+}
+
+.StartButton{
+  background-color: #a9661a;
+  border: 4px groove rgb(114, 112, 112);
+  color: whitesmoke;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  margin-left: 2vw;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  font-size: 1.5vw;
 }
 
 .DisplayWordSection{
   color: black;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.GuessLettersSection{
+  color: black;
+  position: relative;
+  display: inline;
+  align-items: center;
+  justify-content: center;
 }
 
 .Letter{
@@ -14,20 +55,79 @@ body{
   border-style: groove;
   width: 4vw;
   text-align: center;
+  background-color: whitesmoke
 }
 
-.GuessedLetter{
+.LetterRed{
   display: inline-block;
   padding-left: 1vw;
   padding-right: 1vw;
   border-style: groove;
   width: 4vw;
   text-align: center;
-  background-color: rgba(255, 0, 0, 0.304);
+  background-color: rgba(255, 2, 2, 0.753);
 }
 
-.GuessedLetterMessageDisplayed{
-  font-size: 2vw;
+.InputLetterSection{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HangmanInput{
+  border: 4px groove rgb(114, 112, 112);
+  font-size: 1.5vw;
+}
+
+.WordGenSection{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.GuessedLetterOuter{
+  display: inline-block;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  border-style: groove;
+  width: 4vw;
+  text-align: center;
+  background-color: rgba(255, 2, 2, 0.753);
+}
+
+.LetterSectionInner{
+  font-size: 2.5vw;
+}
+
+.FeedbackMessage{
+  font-size: 3vw;
+  color: white;
+  padding-top: 2vw;
+  text-align: center;
+  text-shadow: -2px -2px 0 #000,
+  2px -2px 0 #000,
+  -2px 2px 0 #000,
+  2px 2px 0 #000;
+}
+
+.VictoryMessage{
+  font-size: 3vw;
+  font-weight: bolder;
+  color: rgb(38, 255, 0);
+  padding-top: 2vw;
+  text-align: center;
+}
+
+.DefeatMessage{
+  font-size: 3vw;
+  font-weight: bolder;
+  color: rgb(255, 0, 0);
+  padding-top: 2vw;
+  text-align: center;
 }
 
 .DisplayNone{
@@ -37,19 +137,34 @@ body{
 .HangmanImageWordDisplay{
   display: inline-block;
   font-size: 2vw;
+  color: whitesmoke;
 }
 
 .HangmanImageDisplay{
   display: inline-block;
 }
 
+.HelpButton{
+  background-color: #a9661a;
+  border: 4px groove rgb(114, 112, 112);
+  color: white;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  margin-left: 2vw;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  font-size: 2vw;
+}
+
 .HelpPopUp{
   position: fixed;
   top: 3vw;
   left: 3vw;
-  width: 90%;
+  width: 80%;
   height: 90%;
   background-color: grey;
+  background-image: url("./images/Executioner.jpeg");
 }
 
 .HelpPopUpInner{
@@ -61,7 +176,14 @@ body{
 
 .CloseButton{
   position: absolute;
-  top: 1vw;
+  top: 0.25vw;
+  background-color: #a9661a;
+  border: 4px groove rgb(114, 112, 112);
+  color: white;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  justify-content: center;
+  font-size: 2vw;
 }
 
 .HelpText{

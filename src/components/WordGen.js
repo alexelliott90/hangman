@@ -1,11 +1,10 @@
-import {React, useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import {React, useState} from "react";
+import { useDispatch } from "react-redux"
 import {newWord} from '../store/words'
 
 //function to generate a random word
 function WordGenerator(){
     const [buttonText, setButtonText] = useState("Start")
-    const userWord = useSelector((state) => state.words.wordToGuess)
     const dispatch = useDispatch();
     
     //function to call API and generate a random word, which is then stored in the words slice
@@ -18,9 +17,9 @@ function WordGenerator(){
             } 
 
         return(
-            <div>
+            <div className="WordGenSection">
                 <form>
-                    <button variant="primary" size="lg" onClick={handleClick}>{buttonText}</button>
+                    <button className="StartButton" variant="primary" size="lg" onClick={handleClick}>{buttonText}</button>
                 </form>
             </div>
     )

@@ -7,14 +7,31 @@ export const wordsSlice = createSlice({
 
     initialState: {
         wordToGuess: '',
+        //array to store the user's progress on guessing the word:
         wordProgress: [],
+        //array containing the full word to be displayed on win
         wordToDisplay: [],
+        //state containing the last letter input by the user
         lastGuessedLetter: "",
+        //array containing the letters guessed so far
         guessedLetters: [],
+        //count of incorrect guesses, used to determine image displayed and whether user has lost the game
         incorrectGuesses: 0,
+        //message to be displayed showing whether user has won or lost
+        incorrectOrCorrect: "",
+        //number of remaining un-guessed letters to determine whether user has won
+        blankLetterCount: 0,
+        //classes to enable messages and images to be displayed or not
         guessedLetterClass: "DisplayNone",
+        inputLetterSectionClass: "DisplayNone",
+        displayWordClass: "Letter",
         hangmanImageClass: "DisplayNone",
         hangmanMessageClass: "DisplayNone",
+        //content of messages to be displayed on startup (to be changed in following functions in the reducer)
+        pageTitle: "Welcome To Hangman!",
+        pageTitleClass: "PageTitle",
+        startMessage: "Press Start to begin",
+        feedbackMessageClass: "DisplayNone",
     },
 
     reducers: {
@@ -25,8 +42,17 @@ export const wordsSlice = createSlice({
             state.lastGuessedLetter = ""
             state.guessedLetters = []
             state.incorrectGuesses = 0
-            
+            state.incorrectOrCorrect = ""
+            state.winLoseMessage = ""
+            state.winLoseMessage = ""
             state.wordToGuess = action.payload
+            state.blankLetterCount = 0
+            state.pageTitleClass = "DisplayNone"
+            state.inputLetterSectionClass = "InputLetterSection"
+            state.displayWordClass = "Letter"
+            state.hangmanImageClass = "DisplayNone"
+            state.hangmanMessageClass= "DisplayNone"
+
             let text = state.wordToGuess
             
             //generate an array of each letter of the word
@@ -40,61 +66,87 @@ export const wordsSlice = createSlice({
         },
 
         inputLetter: (state, action) => {
+            //store the user inputted letter
             state.lastGuessedLetter = action.payload[0].toLowerCase()
         },
 
         guessLetter: (state, action) => {
+            let blankLetterCount = 0
+            state.incorrectOrCorrect = ""
             state.lastGuessedLetter = ""
-            console.log(action.payload.length)
             if(action.payload.length > 0){
+                //if there is user input, store this letter
                 let letter = action.payload[0]
                 let guessedLetterArray = state.guessedLetters
                 let letterGuessed = 0
-                state.guessedLetterClass = "GuessedLetterMessageDisplayed"
+                state.feedbackMessageClass = "FeedbackMessage"
                 //check previously guessed letters to see if new letter has already been guessed
-                for(let i = 0; i < guessedLetterArray.length ; i++){
-                    if(guessedLetterArray[i] === letter){
-                        letterGuessed = letterGuessed + 1
-                        alert("Letter already guessed, please try another")
-                    }else{}
-                }
+                if(letter.toLowerCase() === letter.toUpperCase()){
+                    letterGuessed = letterGuessed + 1
+                    alert("Please input a letter")
+                }else{
+                    for(let i = 0; i < guessedLetterArray.length ; i++){
+                        if(guessedLetterArray[i] === letter){
+                            letterGuessed = letterGuessed + 1
+                            alert("Letter already guessed, please try another")
+                        }
+                    }
+                    }
+                
                 //if letter hasnt already been guessed, push it to the guessed letter array
                 if(letterGuessed == 0){
-                    state.guessedLetters.push(letter)
-                    let blankLetterCount = 0
+                    
                     let correctGuess = 0
                     for(let i=0; i < state.wordToDisplay.length ; i++){
                         if(letter == state.wordToDisplay[i]){
                             state.wordProgress[i] = letter
                             correctGuess ++
+                            state.incorrectOrCorrect = "Good guess! Letter correct"
                         }else if(state.wordProgress[i] == "*"){
                             blankLetterCount ++
                         }
                     }
+                    
+                    //if there are no more letters to guess, then user has won
+                    if(blankLetterCount == 0){
+                        state.winLoseMessage = "Congratulations! You have beaten the hangman!"
+                        state.feedbackMessageClass = "VictoryMessage"
+                    }
+                    
                     //if the guess is incorrect, then update the count of incorrect guesses
                     if(correctGuess == 0){
                         state.incorrectGuesses ++
+                        //display the hangman image and words
                         state.hangmanImageClass = "HangmanImageDisplay"
                         state.hangmanMessageClass = "HangmanImageWordDisplay"
-                    }
+                        //check for whether 10 incorrect guesses have been made. If so, the user has lost
+                        if(state.incorrectGuesses == 10){
+                            state.winLoseMessage = "Oh no! The hangman has won!"
+                            state.feedbackMessageClass = "DefeatMessage"
+                            state.wordProgress = state.wordToDisplay
+                            state.displayWordClass = "LetterRed"
 
-                    //if there are no more letters to guess, then user has won
-                    //if the incorrect guesses have reached 10, the user has lost
-                    if(blankLetterCount == 0){
-                        alert("Victory!!")
-                    }else if(state.incorrectGuesses == 10){
-                        alert("You lose!")
+                        }else{   
+                        //if not, they are closer to losing - message updated to reflect this                     
+                        state.incorrectOrCorrect = "Uh oh, incorrect! The hangman is closer to winning"
+
+                        //push the incorrect letter to the guessed letter array
+                        state.guessedLetters.push(letter)
+                        }                    
                     }
                 }
             
             }else{alert("Please input a letter")}
+        
+        },
 
-
+        resetMessage: (state) => {
+            state.incorrectOrCorrect = ""
         }
     }
 })
 
-export const {newWord, inputLetter, guessLetter
+export const {newWord, inputLetter, guessLetter, resetMessage
 } = wordsSlice.actions
 
 export default wordsSlice.reducer

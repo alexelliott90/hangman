@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 //slice to store image names
+//inport images to then store in an array within the slice:
 import state1 from "../images/state1.GIF"
 import state2 from "../images/state2.GIF"
 import state3 from "../images/state3.GIF"
@@ -33,8 +34,5 @@ export const imagesSlice = createSlice({
     reducers: {
     }
 })
-
-//export const {
-//} = imagesSlice.actions
 
 export default imagesSlice.reducer
